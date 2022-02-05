@@ -5,34 +5,35 @@
 
 \desc{every object needs an ID to be tracable in map and in state}
 
-\data{shapeClass shape}
+\data{shape: Shape}
 
-\data{positionClass position}
+\desc{which could be empty if the object is an owner}
 
-\desc{position of an anchor point regardless of shape}
+\data{position: Position}
+
+\desc{position and orientation of an anchor point of the object}
 \\ \hline
-\method{offspringObjects=evolve(delta-t)}
+\method{evolve(delta-t, intersection-result: InIn) -> list[Object]: offspring-objects}
 
-\desc{changes the state}
+\desc{changes the state (position, internal attributes, etc) of the object}
 
-\desc{offsprings are the possibly created objects. How these possibly imaginary objects interact with the world and how long they live is not an architectural concern}
+\desc{trvial evolution: when the object never changes state}
 
-\desc{pass for a trivial evolution. Otherwise, the object requires  information. For instance, intersection with other objects. What to pass to evolve()?}
+\desc{offsprings are the possibly non-physical objects required to accomplish something.}
 
 \method{visualize()}
 
-\desc{returns the information required for graphics
-boundingBox()}
+\desc{returns the information required for visualization}
 
-\desc{simply calls that of the shape? TBD. if world needs shape, we can omit this anyway}
+\method{bounding-box() -> Box}
 
-\method{dumpState()}
-
-\desc{return value must have the objectID + a list of states. Maybe with variables names and values. All textual}
+\desc{returns a box which contains the whole object. used to optimize intersection evaluation}
 
 \method{get-required-delta-t()}
 
-\desc{calculates the delta-t it requires to operate right}
+\desc{calculates the delta-t it requires to operate}
 
+\method{time-to-die() -> bool}
+
+\desc{tells the World if it wants to be eliminated. This might be where Agent Smith cheated the matrix!}
 \end{tabular} 
-
